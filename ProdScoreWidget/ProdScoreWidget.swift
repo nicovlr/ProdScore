@@ -1,115 +1,198 @@
 import WidgetKit
 import SwiftUI
+import AppIntents
 
-// MARK: - Timeline
+// MARK: - Timeline Entry
 
-struct ScoreEntry: TimelineEntry {
+struct ProductEntry: TimelineEntry {
     let date: Date
-    let score: Int
+    let productName: String
+    let price: Double
+    let hoursWorked: Double
+    let hoursNeeded: Double
+    let progress: Double
+    let imageData: Data?
     let message: String
+
+    var hoursRemaining: Double { max(0, hoursNeeded - hoursWorked) }
+
+    static let placeholder = ProductEntry(
+        date: .now,
+        productName: "MacBook Pro",
+        price: 1999,
+        hoursWorked: 30,
+        hoursNeeded: 80,
+        progress: 0.375,
+        imageData: nil,
+        message: "Plus que 50h de taff !"
+    )
 }
 
-struct Provider: TimelineProvider {
-    func placeholder(in context: Context) -> ScoreEntry {
-        ScoreEntry(date: .now, score: 42, message: "Go go go!")
+// MARK: - Provider
+
+struct ProductProvider: TimelineProvider {
+    func placeholder(in context: Context) -> ProductEntry {
+        .placeholder
     }
 
-    func getSnapshot(in context: Context, completion: @escaping (ScoreEntry) -> Void) {
-        completion(ScoreEntry(
-            date: .now,
-            score: ScoreManager.score,
-            message: ScoreManager.message
-        ))
+    func getSnapshot(in context: Context, completion: @escaping (ProductEntry) -> Void) {
+        completion(makeEntry())
     }
 
-    func getTimeline(in context: Context, completion: @escaping (Timeline<ScoreEntry>) -> Void) {
-        let entry = ScoreEntry(
-            date: .now,
-            score: ScoreManager.score,
-            message: ScoreManager.message
-        )
+    func getTimeline(in context: Context, completion: @escaping (Timeline<ProductEntry>) -> Void) {
+        let entry = makeEntry()
         completion(Timeline(entries: [entry], policy: .atEnd))
+    }
+
+    private func makeEntry() -> ProductEntry {
+        let netPerHour = DataStore.netPerHour
+        guard let product = DataStore.selectedProduct, netPerHour > 0 else {
+            return ProductEntry(
+                date: .now,
+                productName: "Aucun produit",
+                price: 0,
+                hoursWorked: 0,
+                hoursNeeded: 0,
+                progress: 0,
+                imageData: nil,
+                message: "Ouvre l'app pour commencer"
+            )
+        }
+
+        let needed = product.hoursNeeded(netPerHour: netPerHour)
+        let remaining = product.hoursRemaining(netPerHour: netPerHour)
+
+        return ProductEntry(
+            date: .now,
+            productName: product.name,
+            price: product.price,
+            hoursWorked: product.hoursWorked,
+            hoursNeeded: needed,
+            progress: product.progress(netPerHour: netPerHour),
+            imageData: product.imageData,
+            message: MotivationalMessages.message(hoursRemaining: remaining, productName: product.name)
+        )
     }
 }
 
 // MARK: - Small Widget
 
 struct SmallWidgetView: View {
-    let entry: ScoreEntry
+    let entry: ProductEntry
 
     var body: some View {
-        VStack(spacing: 4) {
-            Text("\(entry.score)")
-                .font(.system(size: 52, weight: .black, design: .rounded))
-                .foregroundColor(.white)
-                .minimumScaleFactor(0.5)
+        VStack(spacing: 8) {
+            Spacer()
 
-            Text("Prod")
-                .font(.system(size: 15, weight: .bold))
-                .foregroundColor(.white.opacity(0.6))
+            GreenProgressBar(progress: entry.progress, height: 8)
+
+            Text(MotivationalMessages.shortMessage(hoursRemaining: entry.hoursRemaining))
+                .font(Theme.roundedFont(13, weight: .semibold))
+                .foregroundStyle(.white)
+                .multilineTextAlignment(.center)
+                .minimumScaleFactor(0.7)
+
+            Spacer()
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .padding(12)
         .containerBackground(for: .widget) {
             Color.black
         }
     }
 }
 
-// MARK: - Medium Widget (expanded)
+// MARK: - Medium Widget
 
 struct MediumWidgetView: View {
-    let entry: ScoreEntry
+    let entry: ProductEntry
 
     var body: some View {
-        HStack(spacing: 0) {
-            // Score side
-            VStack(spacing: 4) {
-                Text("\(entry.score)")
-                    .font(.system(size: 52, weight: .black, design: .rounded))
-                    .foregroundColor(.white)
-                    .minimumScaleFactor(0.5)
-
-                Text("Prod")
-                    .font(.system(size: 15, weight: .bold))
-                    .foregroundColor(.white.opacity(0.6))
+        HStack(spacing: 12) {
+            if let data = entry.imageData, let uiImage = UIImage(data: data) {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 56, height: 56)
+                    .cornerRadius(10)
+                    .clipped()
+            } else {
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(Color.white.opacity(0.1))
+                    .frame(width: 56, height: 56)
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
 
-            // Divider
-            Rectangle()
-                .fill(.white.opacity(0.15))
-                .frame(width: 1)
-                .padding(.vertical, 16)
+            VStack(alignment: .leading, spacing: 4) {
+                Text(entry.productName)
+                    .font(Theme.roundedFont(14))
+                    .foregroundStyle(.white)
+                    .lineLimit(1)
 
-            // Message side
-            VStack(alignment: .leading, spacing: 6) {
-                Text("Message")
-                    .font(.system(size: 11, weight: .semibold))
-                    .foregroundColor(.white.opacity(0.4))
+                Text("\(Int(entry.price))E")
+                    .font(Theme.roundedFont(12, weight: .semibold))
+                    .foregroundStyle(Theme.green)
 
-                if entry.message.isEmpty {
-                    Text("Aucun message")
-                        .font(.system(size: 14))
-                        .foregroundColor(.white.opacity(0.3))
-                        .italic()
-                } else {
-                    Text(entry.message)
-                        .font(.system(size: 15, weight: .semibold))
-                        .foregroundColor(.white)
-                        .lineLimit(3)
-                }
+                GreenProgressBar(progress: entry.progress, height: 6)
 
-                Spacer()
-
-                Text("Score: \(entry.score)")
-                    .font(.system(size: 12, weight: .bold, design: .rounded))
-                    .foregroundColor(.green)
+                Text(entry.message)
+                    .font(Theme.roundedFont(11, weight: .medium))
+                    .foregroundStyle(.white.opacity(0.6))
+                    .lineLimit(1)
             }
-            .padding(.leading, 16)
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+
+            Button(intent: AddHourIntent(hours: 1)) {
+                Text("+1h")
+                    .font(Theme.roundedFont(14))
+                    .foregroundStyle(.black)
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 8)
+                    .background(Theme.green)
+                    .cornerRadius(8)
+            }
+            .buttonStyle(.plain)
         }
+        .padding(12)
         .containerBackground(for: .widget) {
             Color.black
+        }
+    }
+}
+
+// MARK: - Accessory Circular
+
+struct AccessoryCircularView: View {
+    let entry: ProductEntry
+
+    var body: some View {
+        Gauge(value: entry.progress) {
+            Text("\(Int(entry.hoursRemaining))h")
+                .font(.system(size: 10, weight: .bold, design: .rounded))
+        }
+        .gaugeStyle(.accessoryCircular)
+        .containerBackground(for: .widget) {
+            Color.clear
+        }
+    }
+}
+
+// MARK: - Accessory Rectangular
+
+struct AccessoryRectangularView: View {
+    let entry: ProductEntry
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 2) {
+            Text(entry.productName)
+                .font(.system(size: 13, weight: .bold, design: .rounded))
+                .lineLimit(1)
+
+            ProgressView(value: entry.progress)
+
+            Text("\(Int(entry.hoursRemaining))h restantes")
+                .font(.system(size: 11, weight: .medium, design: .rounded))
+                .foregroundStyle(.secondary)
+        }
+        .containerBackground(for: .widget) {
+            Color.clear
         }
     }
 }
@@ -118,12 +201,18 @@ struct MediumWidgetView: View {
 
 struct ProdScoreWidgetEntryView: View {
     @Environment(\.widgetFamily) var family
-    var entry: Provider.Entry
+    let entry: ProductEntry
 
     var body: some View {
         switch family {
+        case .systemSmall:
+            SmallWidgetView(entry: entry)
         case .systemMedium:
             MediumWidgetView(entry: entry)
+        case .accessoryCircular:
+            AccessoryCircularView(entry: entry)
+        case .accessoryRectangular:
+            AccessoryRectangularView(entry: entry)
         default:
             SmallWidgetView(entry: entry)
         }
@@ -137,11 +226,11 @@ struct ProdScoreWidget: Widget {
     let kind = "ProdScoreWidget"
 
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: Provider()) { entry in
+        StaticConfiguration(kind: kind, provider: ProductProvider()) { entry in
             ProdScoreWidgetEntryView(entry: entry)
         }
-        .configurationDisplayName("Prod Score")
-        .description("Affiche ton score de productivité.")
-        .supportedFamilies([.systemSmall, .systemMedium])
+        .configurationDisplayName("Objectif Epargne")
+        .description("Suis ta progression vers ton prochain achat.")
+        .supportedFamilies([.systemSmall, .systemMedium, .accessoryCircular, .accessoryRectangular])
     }
 }

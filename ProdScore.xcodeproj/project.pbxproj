@@ -8,13 +8,31 @@
 
 /* Begin PBXBuildFile section */
 		AA0000000000000000000001 /* ProdScoreApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0000000000000000000001 /* ProdScoreApp.swift */; };
-		AA0000000000000000000002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0000000000000000000002 /* ContentView.swift */; };
-		AA0000000000000000000003 /* ScoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0000000000000000000003 /* ScoreManager.swift */; };
 		AA0000000000000000000004 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD0000000000000000000004 /* Assets.xcassets */; };
 		AA0000000000000000000005 /* ProdScoreWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0000000000000000000007 /* ProdScoreWidget.swift */; };
 		AA0000000000000000000006 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD0000000000000000000008 /* Assets.xcassets */; };
 		AA0000000000000000000007 /* ProdScoreWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AD000000000000000000000C /* ProdScoreWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		AA0000000000000000000008 /* ScoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0000000000000000000003 /* ScoreManager.swift */; };
+		AA0000000000000000000010 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0000000000000000000010 /* Models.swift */; };
+		AA0000000000000000000011 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0000000000000000000011 /* DataStore.swift */; };
+		AA0000000000000000000012 /* MotivationalMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0000000000000000000012 /* MotivationalMessages.swift */; };
+		AA0000000000000000000013 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0000000000000000000013 /* Theme.swift */; };
+		AA0000000000000000000014 /* GreenProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0000000000000000000014 /* GreenProgressBar.swift */; };
+		AA0000000000000000000015 /* AddHourIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0000000000000000000015 /* AddHourIntent.swift */; };
+		AA0000000000000000000016 /* LinkPreviewFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0000000000000000000016 /* LinkPreviewFetcher.swift */; };
+		AA0000000000000000000017 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0000000000000000000017 /* RootView.swift */; };
+		AA0000000000000000000018 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0000000000000000000018 /* OnboardingView.swift */; };
+		AA0000000000000000000019 /* ProductListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0000000000000000000019 /* ProductListView.swift */; };
+		AA000000000000000000001A /* ProductCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD000000000000000000001A /* ProductCardView.swift */; };
+		AA000000000000000000001B /* AddProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD000000000000000000001B /* AddProductView.swift */; };
+		AA000000000000000000001C /* ProductDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD000000000000000000001C /* ProductDetailView.swift */; };
+		AA000000000000000000001D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD000000000000000000001D /* SettingsView.swift */; };
+		AA000000000000000000001E /* ChargesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD000000000000000000001E /* ChargesView.swift */; };
+		AA0000000000000000000020 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0000000000000000000010 /* Models.swift */; };
+		AA0000000000000000000021 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0000000000000000000011 /* DataStore.swift */; };
+		AA0000000000000000000022 /* MotivationalMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0000000000000000000012 /* MotivationalMessages.swift */; };
+		AA0000000000000000000023 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0000000000000000000013 /* Theme.swift */; };
+		AA0000000000000000000024 /* GreenProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0000000000000000000014 /* GreenProgressBar.swift */; };
+		AA0000000000000000000025 /* AddHourIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0000000000000000000015 /* AddHourIntent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,8 +61,6 @@
 
 /* Begin PBXFileReference section */
 		AD0000000000000000000001 /* ProdScoreApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProdScoreApp.swift; sourceTree = "<group>"; };
-		AD0000000000000000000002 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		AD0000000000000000000003 /* ScoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreManager.swift; sourceTree = "<group>"; };
 		AD0000000000000000000004 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AD0000000000000000000005 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AD0000000000000000000006 /* ProdScore.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ProdScore.entitlements; sourceTree = "<group>"; };
@@ -54,6 +70,21 @@
 		AD000000000000000000000A /* ProdScoreWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ProdScoreWidgetExtension.entitlements; sourceTree = "<group>"; };
 		AD000000000000000000000B /* ProdScore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProdScore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD000000000000000000000C /* ProdScoreWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ProdScoreWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD0000000000000000000010 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		AD0000000000000000000011 /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
+		AD0000000000000000000012 /* MotivationalMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotivationalMessages.swift; sourceTree = "<group>"; };
+		AD0000000000000000000013 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		AD0000000000000000000014 /* GreenProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreenProgressBar.swift; sourceTree = "<group>"; };
+		AD0000000000000000000015 /* AddHourIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHourIntent.swift; sourceTree = "<group>"; };
+		AD0000000000000000000016 /* LinkPreviewFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkPreviewFetcher.swift; sourceTree = "<group>"; };
+		AD0000000000000000000017 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		AD0000000000000000000018 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		AD0000000000000000000019 /* ProductListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListView.swift; sourceTree = "<group>"; };
+		AD000000000000000000001A /* ProductCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCardView.swift; sourceTree = "<group>"; };
+		AD000000000000000000001B /* AddProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductView.swift; sourceTree = "<group>"; };
+		AD000000000000000000001C /* ProductDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailView.swift; sourceTree = "<group>"; };
+		AD000000000000000000001D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		AD000000000000000000001E /* ChargesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChargesView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,8 +119,21 @@
 			children = (
 				AD0000000000000000000006 /* ProdScore.entitlements */,
 				AD0000000000000000000001 /* ProdScoreApp.swift */,
-				AD0000000000000000000002 /* ContentView.swift */,
-				AD0000000000000000000003 /* ScoreManager.swift */,
+				AD0000000000000000000010 /* Models.swift */,
+				AD0000000000000000000011 /* DataStore.swift */,
+				AD0000000000000000000012 /* MotivationalMessages.swift */,
+				AD0000000000000000000013 /* Theme.swift */,
+				AD0000000000000000000014 /* GreenProgressBar.swift */,
+				AD0000000000000000000015 /* AddHourIntent.swift */,
+				AD0000000000000000000016 /* LinkPreviewFetcher.swift */,
+				AD0000000000000000000017 /* RootView.swift */,
+				AD0000000000000000000018 /* OnboardingView.swift */,
+				AD0000000000000000000019 /* ProductListView.swift */,
+				AD000000000000000000001A /* ProductCardView.swift */,
+				AD000000000000000000001B /* AddProductView.swift */,
+				AD000000000000000000001C /* ProductDetailView.swift */,
+				AD000000000000000000001D /* SettingsView.swift */,
+				AD000000000000000000001E /* ChargesView.swift */,
 				AD0000000000000000000004 /* Assets.xcassets */,
 				AD0000000000000000000005 /* Info.plist */,
 			);
@@ -217,8 +261,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA0000000000000000000001 /* ProdScoreApp.swift in Sources */,
-				AA0000000000000000000002 /* ContentView.swift in Sources */,
-				AA0000000000000000000003 /* ScoreManager.swift in Sources */,
+				AA0000000000000000000010 /* Models.swift in Sources */,
+				AA0000000000000000000011 /* DataStore.swift in Sources */,
+				AA0000000000000000000012 /* MotivationalMessages.swift in Sources */,
+				AA0000000000000000000013 /* Theme.swift in Sources */,
+				AA0000000000000000000014 /* GreenProgressBar.swift in Sources */,
+				AA0000000000000000000015 /* AddHourIntent.swift in Sources */,
+				AA0000000000000000000016 /* LinkPreviewFetcher.swift in Sources */,
+				AA0000000000000000000017 /* RootView.swift in Sources */,
+				AA0000000000000000000018 /* OnboardingView.swift in Sources */,
+				AA0000000000000000000019 /* ProductListView.swift in Sources */,
+				AA000000000000000000001A /* ProductCardView.swift in Sources */,
+				AA000000000000000000001B /* AddProductView.swift in Sources */,
+				AA000000000000000000001C /* ProductDetailView.swift in Sources */,
+				AA000000000000000000001D /* SettingsView.swift in Sources */,
+				AA000000000000000000001E /* ChargesView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -227,7 +284,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA0000000000000000000005 /* ProdScoreWidget.swift in Sources */,
-				AA0000000000000000000008 /* ScoreManager.swift in Sources */,
+				AA0000000000000000000020 /* Models.swift in Sources */,
+				AA0000000000000000000021 /* DataStore.swift in Sources */,
+				AA0000000000000000000022 /* MotivationalMessages.swift in Sources */,
+				AA0000000000000000000023 /* Theme.swift in Sources */,
+				AA0000000000000000000024 /* GreenProgressBar.swift in Sources */,
+				AA0000000000000000000025 /* AddHourIntent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
